@@ -1,0 +1,31 @@
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin
+        src="https://unpkg.com/@babel/standalone@7.8.3/babel.min.js"></script>
+<script crossorigin
+        src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script crossorigin
+        src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script type="text/babel">
+    const rootElement = document.getElementById('root');
+    //const element = React.createElement(
+    //  'div',
+    //  {
+    //    className: 'container app',
+    //    children: 'Hello World',
+        // children: React.createElement('span', null, 'Hello World!'),
+    //    style: { color: 'red', backgroundColor: 'green' },
+    //  },
+    //   'Goodbye world!',
+    //   'Hello David',
+    //  );
+    // element.textContent = 'Hello World!';
+    // element.className = 'container';
+    const element = <div className="container">Hello World!</div>
+    console.log(element);
+    // rootElement.appendChild(element);
+    ReactDOM.render(element, rootElement);
+</script>
+</html>
