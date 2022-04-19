@@ -10,14 +10,19 @@
         src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
 <script type="text/babel">
     const rootElement = document.getElementById('root');
-    const classname = "pepePrueba";
-    const element =
+    const Clock = () =>
+    {
+    const [now, setNow] = React.useState(new Date().toLocaleTimeString());
+    return (
     <div className="container">
-        <p className={classname}>
-            Pepe
+        <p className="clock">
+            {now}
         </p>
+    <button onClick={() => {setNow(new Date().toLocaleTimeString());}}> Click </button>
     </div>
-    console.log(element);
-    ReactDOM.render(element, rootElement);
+    );
+    };
+
+    ReactDOM.render(<Clock />, rootElement);
 </script>
 </html>
