@@ -1,16 +1,18 @@
 import TweetsPage from "./components/tweets/TweetsPage.js"
 import TweetsDetailsPage from "./components/tweetsDetail/TweetsDetailsPage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
+import * as React from 'react';
 
 
-function App() {
-  return (
-    <div className="App">
-      <LoginPage />
-      {/* <TweetsPage />
-      <TweetsDetailsPage /> */}
-</div>  
-  );
+function App({ initialLogged }) {
+    const [isLogged, setIsLogged] = React.useState(initialLogged);
+    return (
+        <div className="App">
+            {isLogged ? <TweetsPage isLogged={isLogged} /> : <LoginPage onLogin={() => setIsLogged(true)} />}
+        {/* <TweetsPage />
+        <TweetsDetailsPage /> */}
+        </div>  
+    );
 }
 
 export default App;

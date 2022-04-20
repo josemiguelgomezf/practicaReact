@@ -3,7 +3,7 @@ import { getLatestTweets } from './service';
 import './TweetsPage.css'
 import Layout from '../layout/Layout'
 
-const TweetsPage = () => {
+const TweetsPage = ({ isLogged }) => {
     const [tweets, setTweets] = React.useState([]);
 
     React.useEffect(() => {
@@ -11,7 +11,7 @@ const TweetsPage = () => {
     }, []);
 
     return (
-        <Layout title="Listado">
+        <Layout title="Listado" isLogged>
             <div className="tweetsPage">
                 <ul>
                     {tweets.map(tweet => (
