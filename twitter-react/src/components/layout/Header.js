@@ -1,6 +1,6 @@
 import './Header.css'
 
-function Header({ isLogged }) {
+function Header({ isLogged, onLogout }) {
     return (
         <header className= "header">
             <div>
@@ -8,12 +8,13 @@ function Header({ isLogged }) {
             </div>
             <nav>{
                 isLogged
-                    ? <button className="buttonLogout">Logout</button>
+                    ? <button onClick={onLogout} className="buttonLogout">Logout</button>
                     : <button className="buttonLogin">Login</button>
             }
             </nav>
         </header>
     );
 }
+
 
 export default Header;

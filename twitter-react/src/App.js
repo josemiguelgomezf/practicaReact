@@ -6,9 +6,11 @@ import * as React from 'react';
 
 function App({ initialLogged }) {
     const [isLogged, setIsLogged] = React.useState(initialLogged);
+
     return (
         <div className="App">
-            {isLogged ? <TweetsPage isLogged={isLogged} /> : <LoginPage onLogin={() => setIsLogged(true)} />}
+            {isLogged   ? <TweetsPage isLogged={isLogged} onLogout={() => { setIsLogged(false); localStorage.removeItem('token'); }} />
+                        : <LoginPage onLogin={() => setIsLogged(true)} />}
         {/* <TweetsPage />
         <TweetsDetailsPage /> */}
         </div>  
