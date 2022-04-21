@@ -11,7 +11,7 @@ const TweetsPage = ({ isLogged, onLogout }) => {
     }, []);
 
     return (
-        <Layout title="Listado" isLogged onLogout={onLogout}>
+        <Layout title="Listado" isLogged={isLogged} onLogout={onLogout}>
             <div className="tweetsPage">
                 <ul>
                     {tweets.map(tweet => (
