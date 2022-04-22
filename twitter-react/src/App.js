@@ -18,7 +18,7 @@ function App({ initialLogged }) {
                 <Route path='/tweets'
                     element={<TweetsPage isLogged={isLogged}
                         onLogout={() => { setIsLogged(false); localStorage.removeItem('token'); }} />} />
-                <Route path="/tweets/:tweetId" element={<TweetsPage isLogged={isLogged}
+                <Route path="/tweets/:tweetId" element={<TweetsDetailsPage isLogged={isLogged}
                     onLogout={() => { setIsLogged(false); localStorage.removeItem('token'); }} />} />
                 <Route path="/tweets/new" element={
                     <RequireAuth isLogged={isLogged} >

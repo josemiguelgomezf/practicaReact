@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from './service';
 
 function LoginPage({ onLogin }) {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [credentials, setCredentials] = React.useState({
         username: '',
         password: '',
@@ -33,6 +36,9 @@ function LoginPage({ onLogin }) {
             localStorage.setItem('token', accessToken)
             onLogin();
             setIsLoading(false);
+            const from = location.state?.from?.pathname || '/'
+            console.log(from);
+            navigate(from, { replace: true });
         }
         catch (error) {
             setIsLoading(false);
