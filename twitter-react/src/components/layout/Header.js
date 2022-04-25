@@ -1,5 +1,5 @@
 import './Header.css'
-import { Link, NavLink } from 'react-router-dom'
+import {NavLink } from 'react-router-dom'
 
 function Header({ isLogged, onLogout }) {
     return (
@@ -21,7 +21,11 @@ function Header({ isLogged, onLogout }) {
             <nav>{
                 isLogged
                     ? <button onClick={onLogout} className="buttonLogout">Logout</button>
-                    : <button className="buttonLogin">Login</button>
+                    : <NavLink to="/login">
+                        <div>
+                            <button className="buttonLogin">Login</button>
+                        </div>
+                    </NavLink>
             }
             </nav>
         </header>

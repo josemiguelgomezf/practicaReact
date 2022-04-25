@@ -11,6 +11,15 @@ const TweetsPage = ({ isLogged, onLogout }) => {
         getLatestTweets().then(tweets => setTweets(tweets));
     }, []);
 
+    if (!tweets.length) {
+        return (
+            <Layout title="Listado" isLogged={isLogged} onLogout={onLogout}>
+                <div className="tweetsPage">
+                    <p> Todavía no hay tweets. </p>
+                </div>
+            </Layout>
+            )
+    }
     return (
         <Layout title="Listado" isLogged={isLogged} onLogout={onLogout}>
             <div className="tweetsPage">
