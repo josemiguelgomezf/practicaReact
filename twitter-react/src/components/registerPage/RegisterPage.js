@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { login } from './service';
+import { useNavigate } from 'react-router-dom';
+import { register, login } from './service';
 import { configureClient } from '../../api/client'
 
-function LoginPage({ onLogin }) {
+function RegisterPage() {
     const navigate = useNavigate();
-    const location = useLocation();
     const [credentials, setCredentials] = React.useState({
         email: '',
+        username: '',
+        name: '',
         password: '',
-        remember: false,
     });
 
-    const { email, password, remember } = credentials;
-
-    const [isLoading, setIsLoading] = React.useState(false);
+    const { email, username, name, password } = credentials;
 
     const [error, setError] = React.useState(null);
 
@@ -22,9 +20,7 @@ function LoginPage({ onLogin }) {
         setCredentials(credentials => ({
             ...credentials,
             [event.target.name]:
-            event.target.type === 'checkbox'
-                ? event.target.checked
-                : event.target.value,
+            event.target.value
         }));
     };
 
@@ -32,46 +28,50 @@ function LoginPage({ onLogin }) {
         event.preventDefault();
         try {
             setError(null);
-            setIsLoading(true);
+            await register(credentials);
             const { accessToken } = await login(credentials);
             configureClient({ accessToken });
-            localStorage.setItem('token', accessToken );
-            onLogin();
-            setIsLoading(false);
-            const from = location.state?.from?.pathname || '/'
-            console.log(from);
-            navigate(from, { replace: true });
+            localStorage.setItem('token', accessToken);
+            navigate("/");
         }
         catch (error) {
-            setIsLoading(false);
             setError(error);
         }
     }
 
-    return <div className="loginPage">
-        <h1> Log in</h1>
+    return <div className="registerPage">
+        <h1>Register</h1>
         <form onSubmit={handleSubmit}>
             <input
+                placeholder='Email'
                 type="text"
                 name="email"
                 value={email}
                 onChange={handleChange}
             />
             <input
+                placeholder='username'
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleChange}
+            />
+            <input
+                placeholder='name'
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleChange}
+            />
+            <input
+                placeholder='password'
                 type="password"
                 name="password"
                 value={password}
                 onChange={handleChange}
             />
-            <input
-                type="checkbox"
-                name="remember"
-                checked={remember}
-                onChange={handleChange}
-            />
-            <button type="submit" disabled={!email || !password || isLoading}>Login</button>
+            <button type="submit" disabled={!email || !username || !name || !password}>Register</button>
         </form>
-        {isLoading && <div className="dots-bars-1"></div>}
         {error &&
             <div>
                 <p>{error.message}</p>
@@ -80,4 +80,4 @@ function LoginPage({ onLogin }) {
     </div>
 }
 
-export default LoginPage;
+export default RegisterPage;

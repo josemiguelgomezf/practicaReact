@@ -9,6 +9,9 @@ const TweetsPage = ({ isLogged, onLogout }) => {
     const [tweets, setTweets] = React.useState([]);
     const [error, setError] = React.useState(null);
     React.useEffect(() => {
+        if(localStorage.getItem('token')){
+            isLogged=true;
+        }
         if (isLogged) {
             const accessToken = localStorage.getItem('token');
             configureClient({ accessToken });
@@ -31,7 +34,7 @@ const TweetsPage = ({ isLogged, onLogout }) => {
         return (
             <Layout title="Listado" isLogged={isLogged} onLogout={onLogout}>
                 <div className="tweetsPage">
-                    <p>¡No hay tweets!</p>
+                    <p>ï¿½No hay tweets!</p>
                 </div>
             </Layout>
             )
