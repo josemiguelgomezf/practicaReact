@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from './service';
+import { configureClient } from '../../api/client'
 
 function LoginPage({ onLogin }) {
     const navigate = useNavigate();
@@ -33,7 +34,8 @@ function LoginPage({ onLogin }) {
             setError(null);
             setIsLoading(true);
             const { accessToken } = await login(credentials);
-            localStorage.setItem('token', accessToken)
+            configureClient({ accessToken });
+            localStorage.setItem('token', accessToken );
             onLogin();
             setIsLoading(false);
             const from = location.state?.from?.pathname || '/'
