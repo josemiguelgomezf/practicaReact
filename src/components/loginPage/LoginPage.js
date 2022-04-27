@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from './service';
 import { configureClient } from '../../api/client'
+import './LoginPage.css'
 
 function LoginPage({ onLogin }) {
     const navigate = useNavigate();
@@ -34,8 +35,10 @@ function LoginPage({ onLogin }) {
             setError(null);
             setIsLoading(true);
             const { accessToken } = await login(credentials);
+            if (credentials.remember) {
+                localStorage.setItem('token', accessToken);
+            }
             configureClient({ accessToken });
-            localStorage.setItem('token', accessToken );
             onLogin();
             setIsLoading(false);
             const from = location.state?.from?.pathname || '/'
@@ -49,33 +52,43 @@ function LoginPage({ onLogin }) {
     }
 
     return <div className="loginPage">
-        <h1> Log in</h1>
+        <h1>LOGIN</h1>
         <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                name="email"
-                value={email}
-                onChange={handleChange}
+                <input
+                    placeholder="Email"
+                    type="text"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                />
+                <input
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
             />
-            <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-            />
-            <input
-                type="checkbox"
-                name="remember"
-                checked={remember}
-                onChange={handleChange}
-            />
-            <button type="submit" disabled={!email || !password || isLoading}>Login</button>
+            <div>
+                <label htmlFor="remember">Do you want to be remember?</label>
+                <input
+                    className="checkbox"
+                    type="checkbox"
+                    name="remember"
+                    checked={remember}
+                    onChange={handleChange}
+                />
+            </div>
+            <button type="submit" disabled={(!email || !password || isLoading)}>LOGIN</button>
         </form>
+        <div className="registerDiv">
+            <p>Aren't yet register?</p>
+            <button onClick={() => { navigate("/register") }}>REGISTER</button>
+        </div>
         {isLoading && <div className="dots-bars-1"></div>}
         {error &&
-            <div>
-                <p>{error.message}</p>
-                <div onClick={() => { setError(null) }}>X</div>
+            <div className="errorDiv">
+            <p>{error.message}</p>
+            <button onClick={() => { setError(null) }}>X</button>
             </div>}
     </div>
 }

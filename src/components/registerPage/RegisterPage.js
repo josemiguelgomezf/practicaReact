@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register, login } from './service';
-import { configureClient } from '../../api/client'
+import { register } from './service';
+import './RegisterPage.css'
 
 function RegisterPage() {
     const navigate = useNavigate();
@@ -29,10 +29,7 @@ function RegisterPage() {
         try {
             setError(null);
             await register(credentials);
-            const { accessToken } = await login(credentials);
-            configureClient({ accessToken });
-            localStorage.setItem('token', accessToken);
-            navigate("/");
+            navigate("/login");
         }
         catch (error) {
             setError(error);
@@ -40,7 +37,7 @@ function RegisterPage() {
     }
 
     return <div className="registerPage">
-        <h1>Register</h1>
+        <h1>REGISTER</h1>
         <form onSubmit={handleSubmit}>
             <input
                 placeholder='Email'
@@ -70,12 +67,14 @@ function RegisterPage() {
                 value={password}
                 onChange={handleChange}
             />
-            <button type="submit" disabled={!email || !username || !name || !password}>Register</button>
+            <div>
+                <button type="submit" disabled={!email || !username || !name || !password}>REGISTER</button>
+            </div>
         </form>
         {error &&
-            <div>
-                <p>{error.message}</p>
-                <div onClick={() => { setError(null) }}>X</div>
+            <div className="errorDiv">
+            <p>{error.message}</p>
+            <button onClick={() => { setError(null) }}>X</button>
             </div>}
     </div>
 }

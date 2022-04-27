@@ -1,13 +1,14 @@
-import TweetsPage from "./components/tweets/TweetsPage.js"
-import TweetsDetailsPage from "./components/tweetsDetail/TweetsDetailsPage.js"
-import TweetsNewPage from "./components/tweetsNew/TweetsNewPage.js"
+import AdvertsPage from "./components/adverts/AdvertsPage"
+import AdvertsDetailsPage from "./components/advertDetail/AdvertsDetailsPage.js"
+import AdvertsNewPage from "./components/advertNew/AdvertsNewPage.js"
 import ErrorPage from "./components/errorPage/errorPage.js"
 import LoginPage from "./components/loginPage/LoginPage.js"
 import RegisterPage from "./components/registerPage/RegisterPage.js"
 import * as React from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import RequireAuth from "./components/loginPage/RequireAuth.js"
-import {resetClient} from "./api/client";
+import { resetClient } from "./api/client";
+import './App.css';
 
 
 function App({ initialLogged }) {
@@ -23,20 +24,20 @@ function App({ initialLogged }) {
             <Routes>
             <Route path='/register' element={<RegisterPage />} />
                 <Route path='/login' element={<LoginPage onLogin={() => setIsLogged(true)} />} />
-                <Route path='/tweets'
-                    element={<TweetsPage isLogged={isLogged}
+                <Route path='/adverts'
+                    element={<AdvertsPage isLogged={isLogged}
                         onLogout={() => {logout()}} />} />
-                <Route path="/tweets/:tweetId" element={<TweetsDetailsPage isLogged={isLogged}
+                <Route path="/adverts/:advertId" element={<AdvertsDetailsPage isLogged={isLogged}
                     onLogout={() => {logout()}} />} />
-                <Route path="/tweets/new" element={
+                <Route path="/adverts/newAdvert" element={
                     <RequireAuth isLogged={isLogged} >
-                        <TweetsNewPage isLogged={isLogged}
+                        <AdvertsNewPage isLogged={isLogged}
                         onLogout={() => {logout()}} />
                     </ RequireAuth>
                 } />
-                <Route path="/" element={<Navigate to="/tweets" />} />
-                <Route path="/404" element={<ErrorPage />} />
-                <Route path="*" element={<Navigate to="/404" />} />
+                <Route path="/" element={<Navigate to="/adverts" />} />
+                <Route path="/errorPage" element={<ErrorPage />} />
+                <Route path="*" element={<Navigate to="/errorPage" />} />
             </Routes>
         </div>  
     );

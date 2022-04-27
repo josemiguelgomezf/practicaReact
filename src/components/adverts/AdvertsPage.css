@@ -1,5 +1,5 @@
 /*Contenedor que va a ser flexbox*/
-.errorPage {
+.advertsPage {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -11,15 +11,4 @@ h1 {
     color: #051367;
     width: 100%;
     padding-left: 1rem;
-}
-
-div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-div p {
-    width: 100%;
 }

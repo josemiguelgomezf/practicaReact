@@ -1,0 +1,125 @@
+/*Contenedor que va a ser flexbox*/
+.loginPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #DFF6FF;
+}
+/*Título de la página*/
+h1 {
+    color: #051367;
+    width: 100%;
+    padding-left: 1rem;
+}
+/*Formulario que va a ser flexbox*/
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1rem;
+}
+/*Inputs del formulario*/
+form input {
+    margin-top: 1rem;
+    border-radius: 20px;
+    border-block-color: #051367;
+    padding: 1rem;
+    width: 50%;
+}
+/*Hacemos que el ancho del checkbox sea menor para que esté junto a su label*/
+.checkbox{
+    width:10%;
+}
+/*Div que contiene un label y un checkbox que va a ser flexbox*/
+form div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+}
+/*Div del registro que contiene un párrafo y un botón*/
+.registerDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    background-color: #2D31FA;
+    justify-content: space-between;
+}
+.registerDiv p{
+    color:white;
+    width:50%;
+}
+/*Div de un error que contiene un párrafo y un botón*/
+.errorDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    background-color: darkred;
+    justify-content: space-between;
+}
+.errorDiv p {
+    color: white;
+    width:50%;
+}
+    .errorDiv button {
+        color: red;
+        border: 2px solid red;
+    }
+    .errorDiv button:after {
+        background: red;
+    }
+/*Botón de LOGIN con una pequeña animación a través del CSS*/
+button {
+    padding-bottom: 1rem;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 20px;
+    z-index: 0;
+    background: #fff;
+    overflow: hidden;
+    border: 2px solid #051367;
+    color: #051367;
+}
+    /*Modificamos la clase disabled y le quitamos los eventos para que no haga la animación*/
+    button:disabled {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        pointer-events: none;
+    }
+
+    button:hover {
+        color: #fff;
+    }
+
+    button:hover:after {
+        height: 100%;
+    }
+
+    button:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        transition: all 0.3s ease;
+        left: 0;
+        bottom: 0;
+        height: 0;
+        width: 100%;
+        background: #051367;
+    }
