@@ -1,3 +1,31 @@
+/*Contenedor que va a ser flexbox*/
 .advertsDetailsPage {
-    background-color: oldlace;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #DFF6FF;
+}
+/*Contenedor de un solo anuncio que va a ser flexbox*/
+.singleAdvert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: white;
+    width: 35%;
+    margin-top: 1rem;
+}
+
+.containerImgs {
+    width: 300px;
+}
+.containerImgs img {
+    width: 100%;
+}
+/*Título de la página*/
+h1 {
+    color: #051367;
+    width: 20%;
+    padding-left: 1rem;
 }

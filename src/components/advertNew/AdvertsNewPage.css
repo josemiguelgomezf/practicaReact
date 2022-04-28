@@ -34,6 +34,12 @@ form {
         flex-direction: row;
         justify-content:center;
     }
+        form div input {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 20%;
+        }
 /*Div de un error que contiene un párrafo y un botón*/
 .errorDiv {
     display: flex;

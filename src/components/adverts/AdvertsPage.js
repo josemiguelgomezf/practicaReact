@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { getLatestAdverts } from './service';
+import { getLatestAdverts, getFilterAdverts } from './service';
 import './AdvertsPage.css'
 import Layout from '../layout/Layout'
+import Search from './Search'
 import { Link } from 'react-router-dom';
 import {configureClient} from '../../api/client'
 
@@ -29,7 +30,7 @@ const AdvertsPage = ({ isLogged, onLogout }) => {
 
     if (!adverts.length) {
         return (
-            <Layout title="LISTADO" isLogged={isLogged} onLogout={onLogout}>
+            <Layout title="LIST" isLogged={isLogged} onLogout={onLogout}>
                 <div className="advertsPage">
                     <p>There isn't adverts!</p>
                 </div>
@@ -37,25 +38,56 @@ const AdvertsPage = ({ isLogged, onLogout }) => {
             )
     }
     return (
-        <Layout title="LISTADO" isLogged={isLogged} onLogout={onLogout}>
+        <Layout title="LIST" isLogged={isLogged} onLogout={onLogout}>
+            <Search>
+            </Search>
+            <button onClick={() => {
+                var tags = [];
+                const tagElement = document.getElementById("tagInput");
+                var options = tagElement && tagElement.options;
+                var opt;
+
+                for (var i = 0, iLen = options.length; i < iLen; i++) {
+                    opt = options[i];
+
+                    if (opt.selected) {
+                        tags.push(opt.value || opt.text);
+                    }
+                }
+                tags = document.getElementById("tagInput").value;
+                console.log(tags);
+                let filtro = ''
+                getFilterAdverts(filtro).then(adverts => setAdverts(adverts))
+                    .catch(Error => setError(Error));
+            }}>SEARCH</button>
+            <button onClick={() => {
+                document.getElementById("tagInput").value = "";
+                document.getElementById("nameInput").value = "";
+                document.getElementById("priceInputMin").value = "";
+                document.getElementById("priceInputMax").value = "";
+                document.getElementById("selectInput").value = "TODOS";
+                getLatestAdverts().then(adverts => setAdverts(adverts))
+                    .catch(Error => setError(Error));
+            }}>CLEAR</button>
             <div className="advertsPage">
-                <ul>
-                    {adverts.map(advert => (
-                        <div key={advert.id}>
+                {adverts.map(advert => (
+                    <div className="singleAdvert" key={advert.id}>
                             <Link to={`/adverts/${advert.id}`}>
-                                {advert.id}
-                            </Link>
                             <p>
                                 {advert.name}
                             </p>
+                            </Link>
                             <p>
                                 {advert.createdAt}
                             </p>
-                            <p>
-                                {advert.sale}
+                            <p hidden={!advert.sale}>
+                                VENTA
+                            </p>
+                            <p hidden={advert.sale}>
+                               COMPRA
                             </p>
                             <p>
-                                {advert.price}
+                                {advert.price}$
                             </p>
                             <p>
                                 {advert.tags}
@@ -63,7 +95,6 @@ const AdvertsPage = ({ isLogged, onLogout }) => {
                         </div>
                     ))
                     }
-                </ul>
             </div>
         </Layout>
     )

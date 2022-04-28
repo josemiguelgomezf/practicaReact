@@ -11,7 +11,7 @@ const AdvertsNewPage = ({ isLogged, onLogout }) => {
         price: '',
         tags: [],
     });
-
+    const [selectedFile, setSelectedFile] = React.useState(null);
     const { name, sale, price, tags } = credentials;
     const [error, setError] = React.useState(null);
     const navigate = useNavigate();
@@ -19,7 +19,15 @@ const AdvertsNewPage = ({ isLogged, onLogout }) => {
     const handleSubmit = async event => {
         event.preventDefault();
         try {
-            const advertCreado = await createAdvert({ credentials });
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("sale", sale);
+            formData.append("price", price);
+            formData.append("tags", tags);
+            if (selectedFile != null) {
+                formData.append("photo", selectedFile);
+            }
+            const advertCreado = await createAdvert(formData);
             navigate(`/adverts/${advertCreado.id}`);
         }
         catch (error) {
@@ -45,68 +53,33 @@ const AdvertsNewPage = ({ isLogged, onLogout }) => {
     return (
         <Layout title="NEW ADVERT" isLogged={isLogged} onLogout={onLogout}>
             <div className="advertsNewPage">
-                    <h1>REGISTER</h1>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            placeholder='Name'
-                            type="text"
-                            name="name"
-                            value={name}
-                            onChange={handleChange}
-                    />
+                    <h1>CREATE ADVERT</h1>
+                <form onSubmit={handleSubmit}>
+                    <input placeholder="name" name="name" value={name} onChange={handleChange} />
                     <div>
                         <label htmlFor="sale">Sale?</label>
                         <input
-                            className="checkbox"
                             type="checkbox"
                             name="sale"
                             checked={sale}
                             onChange={handleChange}
                         />
                     </div>
-                        <input
-                            placeholder='Price'
-                            type="text"
-                            name="price"
-                            value={price}
-                            onChange={handleChange}
-                    />
-                    <div className="radio">
-                        <label>
-                            <input
-                                type="radio"
-                                value={tags}
-                                checked={tags[0] = "Male"}
-                                onChange={handleChange}
-                            />
-                            Male
-                        </label>
+                    <input placeholder="price" type="number" name="price" value={price} onChange={handleChange} />
+                    {/* <input placeholder="tags" type="text" name="tags" value={tags} onChange={handleChange} />*/}
+                    <select name="tags" onChange={handleChange} value={tags} >
+                        <option>TODOS</option>
+                        <option>MOTOR</option>
+                        <option>WORK</option>
+                        <option>LIFESTYLE</option>
+                        <option>MOBILE</option>
+                    </select>
+                    <input type="file" name="photo" onChange={(e) => setSelectedFile(e.target.files[0])} />
+                    <div>
+                        <button disabled={!name || !price || !tags}>
+                            CREATE
+                        </button>
                     </div>
-                    <div className="radio">
-                        <label>
-                            <input
-                                type="radio"
-                                value={tags}
-                                checked={tags[1] = "FeMale"}
-                                onChange={handleChange}
-                            />
-                            FeMale
-                        </label>
-                    </div>
-                    <div className="radio">
-                        <label>
-                            <input
-                                type="radio"
-                                value={tags}
-                                checked={tags[2] = "asasMale"}
-                                onChange={handleChange}
-                            />
-                            asasMale
-                        </label>
-                    </div>
-                        <div>
-                            <button type="submit" disabled={!name || !sale || !price || !tags}>CREATE</button>
-                        </div>
                     </form>
                     {error &&
                         <div className="errorDiv">

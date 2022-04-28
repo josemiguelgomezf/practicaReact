@@ -2,9 +2,19 @@
 .advertsPage {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     background-color: #DFF6FF;
+}
+/*Contenedor de un solo anuncio que va a ser flexbox*/
+.singleAdvert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: white;
+    width:35%;
+    margin-top:1rem;
 }
 /*Título de la página*/
 h1 {

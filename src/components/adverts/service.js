@@ -1,8 +1,12 @@
 import client from '../../api/client'
-import Header from '../layout/Header';
 
 export const getLatestAdverts = () => {
     return client.get('/v1/adverts');
+}
+
+//Busca los anuncios en función de un filtro dado
+export const getFilterAdverts = (filtro) => {
+    return client.get(`/v1/adverts?${filtro}`);
 }
 
 export const getAdvert = (advertId) => {
@@ -10,8 +14,5 @@ export const getAdvert = (advertId) => {
 }
 
 export const createAdvert = advert => {
-    console.log(advert);
-    return client.post(`v1/adverts/`, {name: advert.name }, Headers= {
-        'Content-Type': 'multipart/form-data'
-    })
+    return client.post(`v1/adverts/`, advert)
 }

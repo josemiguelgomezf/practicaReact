@@ -25,10 +25,18 @@ function App({ initialLogged }) {
             <Route path='/register' element={<RegisterPage />} />
                 <Route path='/login' element={<LoginPage onLogin={() => setIsLogged(true)} />} />
                 <Route path='/adverts'
-                    element={<AdvertsPage isLogged={isLogged}
-                        onLogout={() => {logout()}} />} />
-                <Route path="/adverts/:advertId" element={<AdvertsDetailsPage isLogged={isLogged}
-                    onLogout={() => {logout()}} />} />
+                    element={
+                        <RequireAuth isLogged={isLogged} >
+                        <AdvertsPage isLogged={isLogged}
+                                onLogout={() => { logout() }} />
+                        </ RequireAuth>
+                    } />
+                <Route path="/adverts/:advertId" element={
+                    <RequireAuth isLogged={isLogged} >
+                    <AdvertsDetailsPage isLogged={isLogged}
+                            onLogout={() => { logout() }} />
+                    </ RequireAuth>
+                } />
                 <Route path="/adverts/newAdvert" element={
                     <RequireAuth isLogged={isLogged} >
                         <AdvertsNewPage isLogged={isLogged}
