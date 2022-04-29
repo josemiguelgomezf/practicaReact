@@ -3,7 +3,7 @@ import './Search.css'
 function Search() {
     return (
         <div>
-            <select id="tagInput" name="sale" multiple>
+            <select id="tagInput" name="sale" multiple="multiple">
                 <option>MOTOR</option>
                 <option>WORK</option>
                 <option>LIFESTYLE</option>

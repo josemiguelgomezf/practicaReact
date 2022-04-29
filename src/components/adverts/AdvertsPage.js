@@ -43,19 +43,11 @@ const AdvertsPage = ({ isLogged, onLogout }) => {
             </Search>
             <button onClick={() => {
                 var tags = [];
-                const tagElement = document.getElementById("tagInput");
-                var options = tagElement && tagElement.options;
-                var opt;
-
-                for (var i = 0, iLen = options.length; i < iLen; i++) {
-                    opt = options[i];
-
-                    if (opt.selected) {
-                        tags.push(opt.value || opt.text);
-                    }
-                }
-                tags = document.getElementById("tagInput").value;
-                console.log(tags);
+                tags = document.getElementById("tagInput").selectedOptions;
+                var sale = document.getElementById("selectInput").value;
+                var tagsSelected = Array.from(tags).map(({ value }) => value);
+                console.log(tagsSelected);
+                console.log(sale);
                 let filtro = ''
                 getFilterAdverts(filtro).then(adverts => setAdverts(adverts))
                     .catch(Error => setError(Error));
