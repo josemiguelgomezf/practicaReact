@@ -1,4 +1,7 @@
-# USER to test
+# IMPORTANTE!!! 
+HACER npm install
+
+USUARIO PARA TESTEAR
 
 pepe@gmail.com
 1234
