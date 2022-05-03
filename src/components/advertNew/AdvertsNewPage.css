@@ -38,7 +38,7 @@ form {
             display: flex;
             flex-direction: row;
             justify-content: center;
-            width: 20%;
+            width: 10%;
         }
 /*Div de un error que contiene un párrafo y un botón*/
 .errorDiv {

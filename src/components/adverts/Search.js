@@ -2,7 +2,7 @@ import './Search.css'
 
 function Search() {
     return (
-        <div>
+        <div className="containerSearch">
             <select id="tagInput" name="sale" multiple="multiple">
                 <option>MOTOR</option>
                 <option>WORK</option>

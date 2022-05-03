@@ -67,8 +67,7 @@ const AdvertsNewPage = ({ isLogged, onLogout }) => {
                     </div>
                     <input placeholder="price" type="number" name="price" value={price} onChange={handleChange} />
                     {/* <input placeholder="tags" type="text" name="tags" value={tags} onChange={handleChange} />*/}
-                    <select name="tags" onChange={handleChange} value={tags} >
-                        <option>TODOS</option>
+                    <select name="tags" onChange={handleChange} value={tags}>
                         <option>MOTOR</option>
                         <option>WORK</option>
                         <option>LIFESTYLE</option>

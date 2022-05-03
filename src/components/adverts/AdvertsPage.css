@@ -22,3 +22,19 @@ h1 {
     width: 100%;
     padding-left: 1rem;
 }
+
+/*Div de un error que contiene un párrafo y un botón*/
+    .errorDiv2 p {
+        margin-top: 0.2rem;
+        color: black;
+    }
+
+    .errorDiv2 button {
+        height:2rem;
+        color: red;
+        border: 2px solid red;
+    }
+
+        .errorDiv2 button:after {
+            background: red;
+        }
